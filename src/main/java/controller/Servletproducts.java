@@ -13,7 +13,6 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Locale;
 
 @WebServlet(name = "Servletproducts", urlPatterns = "/products")
 public class Servletproducts extends HttpServlet {
@@ -32,6 +31,12 @@ public class Servletproducts extends HttpServlet {
                 break;
             case "edit":
                 showEdit(request,response);
+                break;
+            case "search":
+                search(request,response);
+                break;
+            case "delete":
+                delete(request,response);
                 break;
             default:
                 try {
@@ -81,6 +86,20 @@ public class Servletproducts extends HttpServlet {
             e.printStackTrace();
         }
     }
+    private void search (HttpServletRequest request,HttpServletResponse response){
+        String name = request.getParameter("name");
+        List<Product>products=productDAO.findByName(name);
+        request.setAttribute("products",products);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -101,9 +120,7 @@ public class Servletproducts extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-            case "delete":
-                delete(request,response);
-                break;
+
         }
 
     }

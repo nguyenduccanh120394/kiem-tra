@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLConnection {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/qlsp?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/ktmd3";
     private String jdbcUsername = "root";
     private String jdbcPassword = "123456";
     public Connection getConnection() throws ClassNotFoundException, SQLException {

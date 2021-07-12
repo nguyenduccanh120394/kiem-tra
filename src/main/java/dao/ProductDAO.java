@@ -16,7 +16,8 @@ private final String SELECT_ALL = "select * from product";
 private final String SELECT_BY_ID = "select * from product where id =?";
 private final String ADD = "insert into product (name,price,quantity,color,description,idCategory)";
 private final String DELETE = "delete from product where id = ?;";
-private static final String UPDATE_SQL = "update product set name = ?,price= ?, quantity =?, color =?,description=?,idCategory=? where id = ?;";
+private static final String UPDATE_SQL = "update product set name = ?,price= ?, quantity =?, color =?,description=?,idCategory=? where id = ?";
+private final String SELECT_BY_NAME = "select * from product where name like ?";
 
 
     @Override
@@ -110,5 +111,30 @@ private static final String UPDATE_SQL = "update product set name = ?,price= ?, 
         preparedStatement.executeUpdate();
         rowDelete = preparedStatement.executeUpdate() > 0;
         return rowDelete;
+    }
+    public List<Product> findByName(String name) {
+        List<Product> products = new ArrayList<>();
+        Connection connection ;
+        try {
+            connection = sqlConnection.getConnection();
+            PreparedStatement preparedStatement =connection.prepareStatement(SELECT_BY_NAME);
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                int price = resultSet.getInt("price");
+                int quantity = resultSet.getInt("quantity");
+                String color = resultSet.getString("color");
+                String description = resultSet.getString("description");
+                int idCategory = resultSet.getInt("idCategory");
+                Product product = new Product(id,name,price,quantity,color,description,idCategory);
+                products.add(product);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 }

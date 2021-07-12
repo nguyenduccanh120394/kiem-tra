@@ -11,4 +11,7 @@ public interface IProductDAO {
     void insert(Product product);
     boolean update(Product product) throws SQLException, ClassNotFoundException;
     boolean delete(int id) throws SQLException, ClassNotFoundException;
+
+
+    List<Product> findByName(String name);
 }

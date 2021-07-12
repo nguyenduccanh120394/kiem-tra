@@ -14,6 +14,12 @@
 <body>
 <div class="container">
     <h1>LIST PRODUCT</h1>
+    <a href="/products?action=create">Create</a>
+    <form method="get">
+        <input type="hidden" value="action" name="search">
+        <input type="text" name="search">
+        <input type="submit" value="Search">
+    </form>
     <div class = "row">
         <div class="col-mb-4"></div>
         <div class="col-mb-4">
@@ -28,22 +34,22 @@
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <tr>
-                    <c:forEach begin="0" var="i" end="${products.size()-1}">
-                        <tr>
-                            <td>${products.get(i).getName()}</td>
-                            <td>${product.get(i).getPrice()}</td>
-                            <td>${product.get(i).getQuantity()}</td>
-                            <td>${product.get(i).getColor()}</td>
-                            <td>${product.get(i).getDescription()}</td>
-                <c:if test="${products.get(i).getIdCategory()==categories.get(i).getId()}">
-                            <td>${categories.get(i).getName()}</td>
-                </c:if>
-                            <td><a href="/products?action=edit&id=${products.get(i).getId()}"></a></td>
-                            <td><a href="/products?action=delete&id=${products.get(i).getId()}"></a></td>
-                        </tr>
-                    </c:forEach>
-                </tr>
+<%--                <tr>--%>
+<%--                    <c:forEach begin="0" var="i" end="${products.size()-1}">--%>
+<%--                        <tr>--%>
+<%--                            <td>${products.get(i).getName()}</td>--%>
+<%--                            <td>${products.get(i).getPrice()}</td>--%>
+<%--                            <td>${products.get(i).getQuantity()}</td>--%>
+<%--                            <td>${products.get(i).getColor()}</td>--%>
+<%--                            <td>${products.get(i).getDescription()}</td>--%>
+<%--                <c:if test="${products.get(i).getIdCategory()==categories.get(i).getId()}">--%>
+<%--                            <td>${categories.get(i).getName()}</td>--%>
+<%--                </c:if>--%>
+<%--                            <td><a href="/products?action=edit&id=${products.get(i).getId()}"></a></td>--%>
+<%--                            <td><a href="/products?action=delete&id=${products.get(i).getId()}"></a></td>--%>
+<%--                        </tr>--%>
+<%--                    </c:forEach>--%>
+<%--                </tr>--%>
             </table>
 
         </div>
