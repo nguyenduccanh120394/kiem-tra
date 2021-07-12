@@ -15,27 +15,27 @@
     <table>
         <tr>
             <td>Name</td>
-            <td><input type="text" name="name" value=""></td>
+            <td><input type="text" name="name" value="${product.name}"></td>
         </tr>
         <tr>
             <td>Price</td>
-            <td><input type="text" name="price"></td>
+            <td><input type="text" name="price" value="${product.price}"></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="text" name="quantity"></td>
+            <td><input type="text" name="quantity" value="${product.quantity}"></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="text" name="color"></td>
+            <td><input type="text" name="color" value="${product.color}"></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="text" name="description"></td>
+            <td><input type="text" name="description" value="${product.description}"></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="text" name="idCategory"></td>
+            <td><input type="text" name="idCategory" value="${product.idCategory}"></td>
         </tr>
         <tr>
             <td></td>

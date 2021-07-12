@@ -69,6 +69,9 @@ public class Servletproducts extends HttpServlet {
         }
     }
     private void showEdit(HttpServletRequest request,HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product=productDAO.findById(id);
+        request.setAttribute("product",product);
         RequestDispatcher dispatcher=request.getRequestDispatcher("product/edit.jsp");
         try {
             dispatcher.forward(request,response);
@@ -86,21 +89,49 @@ public class Servletproducts extends HttpServlet {
         }
         switch (action){
             case "create":
-
+                create(request,response);
                 break;
             case "edit":
-
+                try {
+                    edit(request,response);
+                    showListProduct(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "delete":
-
+                delete(request,response);
                 break;
         }
 
     }
     private void create(HttpServletRequest request,HttpServletResponse response){
         String name = request.getParameter("name");
-
-
+        int price =Integer.parseInt(request.getParameter("price"));
+        int quantity =Integer.parseInt(request.getParameter("quantity"));
+        String color = request.getParameter("color");
+        String description =request.getParameter("description");
+        int idCategory = Integer.parseInt(request.getParameter("idCategory"));
+        Product product =new Product(name,price,quantity,color,description,idCategory);
+        productDAO.insert(product);
+    }
+    private void edit(HttpServletRequest request,HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product= productDAO.findById(id);
+        productDAO.insert(product);
+    }
+    private  void delete(HttpServletRequest request,HttpServletResponse response){
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+            productDAO.delete(id);
+            showListProduct(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
 
